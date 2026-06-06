@@ -1,0 +1,20 @@
+<div class="image-wrapper">
+  <div class="spinner" *ngIf="loading()"></div>
+
+  <div class="no-image" *ngIf="!loading() && hasError()">
+    <span>🙈</span>
+    <p>Kein Bild verfügbar</p>
+  </div>
+
+  <div class="img-container" *ngIf="!loading() && imageUrl()">
+    <img
+      [src]="imageUrl()!"
+      [alt]="showName ? politician.name : 'Wer ist das?'"
+      [style.filter]="blurPx > 0 ? 'blur(' + blurPx + 'px)' : 'none'"
+      [style.transition]="'filter 0.6s ease'"
+    />
+    <div class="name-overlay" *ngIf="showName">
+      <span>{{ politician.name }}</span>
+    </div>
+  </div>
+</div>

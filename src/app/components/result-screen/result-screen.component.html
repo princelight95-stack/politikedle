@@ -3,6 +3,13 @@
   <h2 *ngIf="won">Glückwunsch!</h2>
   <h2 *ngIf="!won">Nicht erraten</h2>
 
+  <!-- Politician image revealed -->
+  <app-politician-image
+    [politician]="target"
+    [blurPx]="0"
+    [showName]="true"
+  ></app-politician-image>
+
   <p *ngIf="won">
     Du hast <strong>{{ target.name }}</strong> in
     <strong>{{ guessCount }} Versuch{{ guessCount === 1 ? '' : 'en' }}</strong> erraten!
@@ -14,11 +21,9 @@
 
   <div class="actions">
     <button class="btn-share" (click)="shareResult()">📋 Ergebnis teilen</button>
-    <button class="btn-next" *ngIf="isEndless" (click)="nextRound()">
-      ▶ Nächste Runde
-    </button>
+    <button class="btn-next" *ngIf="isEndless" (click)="nextRound()">▶ Nächste Runde</button>
   </div>
 
   <p class="next-hint" *ngIf="!isEndless">Das nächste Rätsel erscheint morgen!</p>
-  <p class="next-hint" *ngIf="isEndless">Endlos-Modus – Runde {{ round }}</p>
+  <p class="next-hint" *ngIf="isEndless">{{ mode === 'photo' ? '📷' : '♾️' }} Runde {{ round }}</p>
 </div>

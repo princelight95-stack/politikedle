@@ -6,7 +6,7 @@ import {
 import { POLITICIANS } from '../data/politicians';
 
 export const MAX_GUESSES = 8;
-export type GameMode = 'daily' | 'endless';
+export type GameMode = 'daily' | 'endless' | 'photo';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
@@ -17,8 +17,8 @@ export class GameService {
   private readonly _guesses = signal<GuessComparison[]>([]);
   private readonly _gameOver = signal(false);
   private readonly _won = signal(false);
-  private _lastEndlessId: string | null = null;
-  private _endlessRound = signal(0);
+  private _lastRandomId: string | null = null;
+  private readonly _round = signal(0);
 
   readonly mode = this._mode.asReadonly();
   readonly targetPolitician = this._targetPolitician.asReadonly();
@@ -27,7 +27,11 @@ export class GameService {
   readonly won = this._won.asReadonly();
   readonly guessCount = computed(() => this._guesses().length);
   readonly remainingGuesses = computed(() => MAX_GUESSES - this._guesses().length);
-  readonly endlessRound = this._endlessRound.asReadonly();
+  readonly endlessRound = this._round.asReadonly();
+
+  readonly photoBlur = computed(() =>
+    this._gameOver() ? 0 : Math.max(0, 24 - this._guesses().length * 3)
+  );
 
   private pickDailyPolitician(): Politician {
     const today = new Date();
@@ -36,9 +40,9 @@ export class GameService {
   }
 
   private pickRandomPolitician(): Politician {
-    const pool = POLITICIANS.filter(p => p.id !== this._lastEndlessId);
+    const pool = POLITICIANS.filter(p => p.id !== this._lastRandomId);
     const pick = pool[Math.floor(Math.random() * pool.length)];
-    this._lastEndlessId = pick.id;
+    this._lastRandomId = pick.id;
     return pick;
   }
 
@@ -67,29 +71,34 @@ export class GameService {
 
   switchToDaily(): void {
     this._mode.set('daily');
-    this._guesses.set([]);
-    this._gameOver.set(false);
-    this._won.set(false);
-    this._endlessRound.set(0);
-    this._targetPolitician.set(this.pickDailyPolitician());
+    this._round.set(0);
+    this.resetState(this.pickDailyPolitician());
   }
 
   switchToEndless(): void {
     this._mode.set('endless');
-    this._guesses.set([]);
-    this._gameOver.set(false);
-    this._won.set(false);
-    this._endlessRound.set(1);
-    this._lastEndlessId = null;
-    this._targetPolitician.set(this.pickRandomPolitician());
+    this._lastRandomId = null;
+    this._round.set(1);
+    this.resetState(this.pickRandomPolitician());
   }
 
-  nextEndlessRound(): void {
+  switchToPhoto(): void {
+    this._mode.set('photo');
+    this._lastRandomId = null;
+    this._round.set(1);
+    this.resetState(this.pickRandomPolitician());
+  }
+
+  nextRound(): void {
+    this._round.update(r => r + 1);
+    this.resetState(this.pickRandomPolitician());
+  }
+
+  private resetState(target: Politician): void {
     this._guesses.set([]);
     this._gameOver.set(false);
     this._won.set(false);
-    this._endlessRound.update(r => r + 1);
-    this._targetPolitician.set(this.pickRandomPolitician());
+    this._targetPolitician.set(target);
   }
 
   private compare(guess: Politician, target: Politician): GuessComparison {
