@@ -20,6 +20,20 @@ export type PositionLevel =
 
 export type Gender = 'männlich' | 'weiblich';
 
+export type Religion = 'katholisch' | 'evangelisch' | 'konfessionslos' | 'muslimisch' | 'jüdisch';
+
+export type Beruf =
+  | 'Jurist'
+  | 'Ökonom'
+  | 'Naturwissenschaftler'
+  | 'Journalist'
+  | 'Unternehmer'
+  | 'Gewerkschafter'
+  | 'Lehrer/Akademiker'
+  | 'sonstiges';
+
+export type AkademischerTitel = 'Prof. Dr.' | 'Dr.' | 'keiner';
+
 export interface Politician {
   id: string;
   name: string;
@@ -28,6 +42,10 @@ export interface Politician {
   position: PositionLevel;
   birthYear: number;
   gender: Gender;
+  religion: Religion;
+  beruf: Beruf;
+  titel: AkademischerTitel;
+  erstmandat: number;
   quote?: string;
 }
 
@@ -43,6 +61,12 @@ export interface GuessComparison {
   birthYearDirection: 'higher' | 'lower' | 'exact';
   birthYearDiff: number;
   gender: CompareResult;
+  religion: CompareResult;
+  beruf: CompareResult;
+  titel: CompareResult;
+  erstmandat: CompareResult;
+  erstmandatDirection: 'higher' | 'lower' | 'exact';
+  erstmandatDiff: number;
   isCorrect: boolean;
 }
 
@@ -85,4 +109,32 @@ export const POSITION_LEVEL_GROUP: Record<PositionLevel, string> = {
   'Bundestagspräsident/in': 'Legislative Bund',
   'MdB / Fraktionsvorsitzende/r': 'Legislative Bund',
   'Parteivorsitzende/r': 'Parteiführung',
+};
+
+// Christian (partial), secular/other (unique)
+export const RELIGION_GROUP: Record<Religion, string> = {
+  'katholisch': 'christlich',
+  'evangelisch': 'christlich',
+  'konfessionslos': 'säkular',
+  'muslimisch': 'nicht-christlich-religiös',
+  'jüdisch': 'nicht-christlich-religiös',
+};
+
+// Akademiker vs Praktiker – gives partial when same broad category
+export const BERUF_GROUP: Record<Beruf, string> = {
+  'Jurist': 'akademiker',
+  'Ökonom': 'akademiker',
+  'Naturwissenschaftler': 'akademiker',
+  'Lehrer/Akademiker': 'akademiker',
+  'Journalist': 'praktiker',
+  'Unternehmer': 'praktiker',
+  'Gewerkschafter': 'praktiker',
+  'sonstiges': 'praktiker',
+};
+
+// Dr. / Prof. Dr. share 'doktor' group → partial
+export const TITEL_GROUP: Record<AkademischerTitel, string> = {
+  'Prof. Dr.': 'doktor',
+  'Dr.': 'doktor',
+  'keiner': 'kein-doktor',
 };

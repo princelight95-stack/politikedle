@@ -33,23 +33,28 @@
     <span class="leg-item wrong">Falsch</span>
   </div>
 
-  <!-- Column headers -->
-  <div class="col-headers" *ngIf="guesses.length > 0">
-    <span>Name</span>
-    <span>Partei</span>
-    <span>Geschlecht</span>
-    <span>Bundesland</span>
-    <span>Amt</span>
-    <span>Geb.-Jahr</span>
-  </div>
+  <!-- Column headers + rows in shared scroll container -->
+  <div class="grid-scroll">
+    <div class="col-headers" *ngIf="guesses.length > 0">
+      <span>Name</span>
+      <span>Partei</span>
+      <span>Gesch.</span>
+      <span>Bundesland</span>
+      <span>Amt</span>
+      <span>Geb.</span>
+      <span>Religion</span>
+      <span>Beruf</span>
+      <span>Titel</span>
+      <span>1.Mandat</span>
+    </div>
 
-  <!-- Guess rows -->
-  <div class="guesses">
-    <app-guess-row
-      *ngFor="let g of guesses; let last = last"
-      [comparison]="g"
-      [animate]="last"
-    ></app-guess-row>
+    <div class="guesses">
+      <app-guess-row
+        *ngFor="let g of guesses; let last = last"
+        [comparison]="g"
+        [animate]="last"
+      ></app-guess-row>
+    </div>
   </div>
 
   <!-- Search input -->

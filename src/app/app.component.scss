@@ -140,23 +140,30 @@
   &.sm { font-size: 0.72rem; padding: 0.15rem 0.5rem; }
 }
 
+// Shared horizontal scroll for headers + rows
+.grid-scroll {
+  overflow-x: auto;
+  width: 100%;
+  padding-bottom: 0.4rem;
+}
+
 // Column headers
 .col-headers {
   display: grid;
-  grid-template-columns: 2fr 1.2fr 1fr 2fr 2fr 1fr;
-  gap: 0.4rem;
-  max-width: 900px;
+  grid-template-columns: 1.8fr 0.9fr 0.75fr 1.4fr 1.5fr 0.75fr 1fr 1.3fr 0.75fr 0.85fr;
+  gap: 0.35rem;
+  min-width: 860px;
   width: 100%;
-  margin: 0 auto;
+  margin-bottom: 0.25rem;
 
   span {
     text-align: center;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     color: #585b70;
     font-weight: 700;
-    padding: 0 0.2rem;
+    padding: 0 0.15rem;
   }
 }
 
@@ -164,8 +171,8 @@
 .guesses {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
+  gap: 0.4rem;
+  min-width: 860px;
 }
 
 // How to play

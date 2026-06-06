@@ -11,7 +11,7 @@
   </div>
 
   <div class="cell" [class]="'result-' + comparison.gender">
-    <span class="cell-label">Geschlecht</span>
+    <span class="cell-label">Gesch.</span>
     <span class="cell-value">{{ comparison.politician.gender }}</span>
   </div>
 
@@ -28,11 +28,39 @@
   </div>
 
   <div class="cell birth-cell" [class]="'result-' + comparison.birthYear">
-    <span class="cell-label">Geb.-Jahr</span>
+    <span class="cell-label">Geb.</span>
     <div class="birth-content">
       <span class="cell-value">{{ comparison.politician.birthYear }}</span>
       <span class="arrow" *ngIf="comparison.birthYearDirection !== 'exact'">
         {{ comparison.birthYearDirection === 'higher' ? '↑' : '↓' }}
+      </span>
+    </div>
+  </div>
+
+  <div class="cell" [class]="'result-' + comparison.religion">
+    <span class="cell-label">Religion</span>
+    <span class="cell-value">{{ comparison.politician.religion }}</span>
+    <span class="hint" *ngIf="comparison.religion === 'partial'">~</span>
+  </div>
+
+  <div class="cell" [class]="'result-' + comparison.beruf">
+    <span class="cell-label">Beruf</span>
+    <span class="cell-value">{{ comparison.politician.beruf }}</span>
+    <span class="hint" *ngIf="comparison.beruf === 'partial'">~</span>
+  </div>
+
+  <div class="cell" [class]="'result-' + comparison.titel">
+    <span class="cell-label">Titel</span>
+    <span class="cell-value">{{ comparison.politician.titel }}</span>
+    <span class="hint" *ngIf="comparison.titel === 'partial'">~</span>
+  </div>
+
+  <div class="cell birth-cell" [class]="'result-' + comparison.erstmandat">
+    <span class="cell-label">1.Mandat</span>
+    <div class="birth-content">
+      <span class="cell-value">{{ comparison.politician.erstmandat }}</span>
+      <span class="arrow" *ngIf="comparison.erstmandatDirection !== 'exact'">
+        {{ comparison.erstmandatDirection === 'higher' ? '↑' : '↓' }}
       </span>
     </div>
   </div>

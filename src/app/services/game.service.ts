@@ -1,7 +1,8 @@
 import { Injectable, signal, computed } from '@angular/core';
 import {
   Politician, GuessComparison, CompareResult,
-  PARTY_FAMILY, STATE_REGION, POSITION_LEVEL_GROUP
+  PARTY_FAMILY, STATE_REGION, POSITION_LEVEL_GROUP,
+  RELIGION_GROUP, BERUF_GROUP, TITEL_GROUP,
 } from '../models/politician.model';
 import { POLITICIANS } from '../data/politicians';
 
@@ -133,6 +134,23 @@ export class GameService {
 
     const genderResult: CompareResult = guess.gender === target.gender ? 'correct' : 'wrong';
 
+    const religionResult: CompareResult =
+      guess.religion === target.religion ? 'correct' :
+      RELIGION_GROUP[guess.religion] === RELIGION_GROUP[target.religion] ? 'partial' : 'wrong';
+
+    const berufResult: CompareResult =
+      guess.beruf === target.beruf ? 'correct' :
+      BERUF_GROUP[guess.beruf] === BERUF_GROUP[target.beruf] ? 'partial' : 'wrong';
+
+    const titelResult: CompareResult =
+      guess.titel === target.titel ? 'correct' :
+      TITEL_GROUP[guess.titel] === TITEL_GROUP[target.titel] ? 'partial' : 'wrong';
+
+    const mandatDiff = guess.erstmandat - target.erstmandat;
+    const mandatResult: CompareResult =
+      mandatDiff === 0 ? 'correct' :
+      Math.abs(mandatDiff) <= 5 ? 'partial' : 'wrong';
+
     return {
       politician: guess,
       party: partyResult,
@@ -143,6 +161,12 @@ export class GameService {
       birthYearDirection: yearDiff === 0 ? 'exact' : yearDiff > 0 ? 'lower' : 'higher',
       birthYearDiff: Math.abs(yearDiff),
       gender: genderResult,
+      religion: religionResult,
+      beruf: berufResult,
+      titel: titelResult,
+      erstmandat: mandatResult,
+      erstmandatDirection: mandatDiff === 0 ? 'exact' : mandatDiff > 0 ? 'lower' : 'higher',
+      erstmandatDiff: Math.abs(mandatDiff),
       isCorrect: guess.id === target.id,
     };
   }
