@@ -87,7 +87,7 @@ export class GameService {
       stateRegion: STATE_REGION[guess.state],
       position: positionResult,
       birthYear: birthYearResult,
-      birthYearDirection: yearDiff === 0 ? 'exact' : yearDiff > 0 ? 'higher' : 'lower',
+      birthYearDirection: yearDiff === 0 ? 'exact' : yearDiff > 0 ? 'lower' : 'higher',
       birthYearDiff: Math.abs(yearDiff),
       gender: genderResult,
       isCorrect: guess.id === target.id,

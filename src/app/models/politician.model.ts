@@ -77,9 +77,9 @@ export const STATE_REGION: Record<GermanState, string> = {
 };
 
 export const POSITION_LEVEL_GROUP: Record<PositionLevel, string> = {
-  'Bundeskanzler/in': 'Exekutive Bund',
-  'Bundespräsident/in': 'Exekutive Bund',
-  'Bundesminister/in': 'Exekutive Bund',
+  'Bundeskanzler/in': 'Kanzleramt',
+  'Bundespräsident/in': 'Staatsoberhaupt',
+  'Bundesminister/in': 'Bundesregierung',
   'Ministerpräsident/in': 'Exekutive Land',
   'Bundestagspräsident/in': 'Legislative Bund',
   'MdB / Fraktionsvorsitzende/r': 'Legislative Bund',
