@@ -1,0 +1,20 @@
+<div class="result-screen" [class.won]="won" [class.lost]="!won">
+  <div class="emoji">{{ won ? '🎉' : '😔' }}</div>
+  <h2 *ngIf="won">Glückwunsch!</h2>
+  <h2 *ngIf="!won">Nicht erraten</h2>
+
+  <p *ngIf="won">
+    Du hast <strong>{{ target.name }}</strong> in
+    <strong>{{ guessCount }} Versuch{{ guessCount === 1 ? '' : 'en' }}</strong> erraten!
+  </p>
+  <p *ngIf="!won">
+    Der gesuchte Politiker war <strong>{{ target.name }}</strong>
+    ({{ target.party }}, {{ target.state }}, geb. {{ target.birthYear }}).
+  </p>
+
+  <div class="actions">
+    <button class="btn-share" (click)="shareResult()">📋 Ergebnis teilen</button>
+  </div>
+
+  <p class="next-hint">Das nächste Rätsel erscheint morgen!</p>
+</div>

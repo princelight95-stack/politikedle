@@ -1,0 +1,62 @@
+.result-screen {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: 16px;
+  border: 2px solid #45475a;
+  background: #181825;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fade-in 0.4s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.emoji {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin: 0 0 1rem;
+  color: #cdd6f4;
+}
+
+p {
+  color: #a6adc8;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+
+  strong { color: #cdd6f4; }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-share {
+  padding: 0.7rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: #89b4fa;
+  color: #1e1e2e;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover { background: #b4d0fb; }
+}
+
+.next-hint {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #585b70;
+}

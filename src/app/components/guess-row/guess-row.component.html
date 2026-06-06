@@ -1,0 +1,39 @@
+<div class="row" [class.animate]="animate">
+  <div class="cell name-cell">
+    <span class="cell-label">Name</span>
+    <span class="cell-value">{{ comparison.politician.name }}</span>
+  </div>
+
+  <div class="cell" [class]="'result-' + comparison.party">
+    <span class="cell-label">Partei</span>
+    <span class="cell-value">{{ comparison.politician.party }}</span>
+    <span class="hint" *ngIf="comparison.party === 'partial'">~</span>
+  </div>
+
+  <div class="cell" [class]="'result-' + comparison.gender">
+    <span class="cell-label">Geschlecht</span>
+    <span class="cell-value">{{ comparison.politician.gender }}</span>
+  </div>
+
+  <div class="cell" [class]="'result-' + comparison.state">
+    <span class="cell-label">Bundesland</span>
+    <span class="cell-value">{{ comparison.politician.state }}</span>
+    <span class="hint" *ngIf="comparison.state === 'partial'">({{ comparison.stateRegion }})</span>
+  </div>
+
+  <div class="cell" [class]="'result-' + comparison.position">
+    <span class="cell-label">Amt</span>
+    <span class="cell-value">{{ comparison.politician.position }}</span>
+    <span class="hint" *ngIf="comparison.position === 'partial'">~</span>
+  </div>
+
+  <div class="cell birth-cell" [class]="'result-' + comparison.birthYear">
+    <span class="cell-label">Geb.-Jahr</span>
+    <div class="birth-content">
+      <span class="cell-value">{{ comparison.politician.birthYear }}</span>
+      <span class="arrow" *ngIf="comparison.birthYearDirection !== 'exact'">
+        {{ comparison.birthYearDirection === 'higher' ? '↑' : '↓' }}
+      </span>
+    </div>
+  </div>
+</div>

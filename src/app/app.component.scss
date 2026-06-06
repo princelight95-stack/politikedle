@@ -1,0 +1,106 @@
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 0;
+  color: #cdd6f4;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: #6c7086;
+  font-size: 1rem;
+}
+
+// Legend
+.legend {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.leg-item {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &.correct { background: #40a02b; color: #fff; }
+  &.partial  { background: #df8e1d; color: #fff; }
+  &.wrong    { background: #45475a; color: #9399b2; }
+  &.sm { font-size: 0.72rem; padding: 0.15rem 0.5rem; }
+}
+
+// Column headers
+.col-headers {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr 2fr 2fr 1fr;
+  gap: 0.4rem;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+
+  span {
+    text-align: center;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #585b70;
+    font-weight: 700;
+    padding: 0 0.2rem;
+  }
+}
+
+// Guess list
+.guesses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+// How to play
+.how-to-play {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #89b4fa;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+
+  ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  li {
+    font-size: 0.85rem;
+    color: #a6adc8;
+    line-height: 1.4;
+  }
+}

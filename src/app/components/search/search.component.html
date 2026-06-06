@@ -1,0 +1,34 @@
+<div class="search-wrapper" *ngIf="!gameOver">
+  <div class="input-row">
+    <div class="autocomplete">
+      <input
+        #inputEl
+        type="text"
+        class="search-input"
+        placeholder="Politiker/in eingeben…"
+        [value]="query()"
+        (input)="onInput($any($event.target).value)"
+        autocomplete="off"
+        autofocus
+      />
+      <ul class="suggestions" *ngIf="suggestions().length > 0">
+        <li
+          *ngFor="let p of suggestions(); let i = index"
+          [class.active]="i === activeIndex()"
+          (mousedown)="selectSuggestion(p)"
+        >
+          <span class="sug-name">{{ p.name }}</span>
+          <span class="sug-party" [attr.data-party]="p.party">{{ p.party }}</span>
+        </li>
+      </ul>
+    </div>
+    <button
+      class="btn-guess"
+      [disabled]="!selected()"
+      (click)="submit()"
+    >
+      Raten
+    </button>
+  </div>
+  <p class="remaining">Noch {{ remainingGuesses }} Versuch{{ remainingGuesses === 1 ? '' : 'e' }}</p>
+</div>

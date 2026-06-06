@@ -1,0 +1,89 @@
+@keyframes pop-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr 2fr 2fr 1fr;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 900px;
+
+  &.animate .cell {
+    animation: pop-in 0.35s ease both;
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 0.07}s; }
+    }
+  }
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.4rem;
+  border-radius: 8px;
+  min-height: 70px;
+  text-align: center;
+  background: #313244;
+  position: relative;
+  gap: 0.2rem;
+}
+
+.cell-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6c7086;
+  font-weight: 600;
+}
+
+.cell-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #cdd6f4;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.hint {
+  font-size: 0.7rem;
+  color: #1e1e2e;
+  opacity: 0.8;
+}
+
+// Result color states
+.result-correct {
+  background: #40a02b;
+  .cell-value, .cell-label, .hint { color: #fff; }
+}
+
+.result-partial {
+  background: #df8e1d;
+  .cell-value, .cell-label, .hint { color: #fff; }
+}
+
+.result-wrong {
+  background: #45475a;
+  .cell-value { color: #9399b2; }
+}
+
+// Birth year arrow
+.birth-content {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.arrow {
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.name-cell {
+  background: #1e1e2e;
+  border: 2px solid #45475a;
+  .cell-value { color: #cdd6f4; }
+}
