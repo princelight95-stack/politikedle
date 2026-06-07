@@ -36,10 +36,15 @@ export class GameService {
 
   readonly nameHint = computed(() => {
     if (this._gameOver() || this.remainingGuesses() > 3) return null;
-    return this._targetPolitician().name
-      .split('')
-      .map(c => c === ' ' ? '  ' : '_')
-      .join(' ');
+    const remaining = this.remainingGuesses();
+    const words = this._targetPolitician().name.split(' ');
+    return words.map((word, wi) => {
+      const revealFirst = wi === 0 && remaining <= 2;
+      const revealLast  = wi === words.length - 1 && remaining <= 1;
+      return word.split('').map((c, ci) =>
+        (ci === 0 && (revealFirst || revealLast)) ? c : '_'
+      ).join(' ');
+    }).join('   ');
   });
 
   private pickDailyPolitician(): Politician {
